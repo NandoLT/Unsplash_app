@@ -1,0 +1,15 @@
+.layout {
+    height: 100%;
+}
+.layout-main {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    margin: 0 auto;
+    max-width: 80%;
+    min-height: calc(100vh - 128px);
+    padding-top: 30px;
+}
+
+.layout-content {
+    margin-top: 100px;
+}
