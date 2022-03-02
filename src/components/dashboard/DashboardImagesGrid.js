@@ -41,7 +41,7 @@ export const DashboardImagesGrid = ({images}) => {
             url_full: img.urls.full,
             url_thumb: img.urls.thumb,
             user_avatar: img.user.profile_image.medium,
-            date: Date.now()
+            date: new Date(Date.now())
         }
 
         storage.get(process.env.REACT_APP_USER_FAVORITES) ?

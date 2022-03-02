@@ -12,14 +12,13 @@ export const UserArea = () => {
 
     useEffect(() => {
         const data = storage.get(process.env.REACT_APP_USER_FAVORITES);
-        console.log('DATA', data);
         setMyImages(data);
     },[])
 
     return (
         <Layout>
-            <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
+            <Box sx={{ flexGrow: 1, marginBottom:'50px' }}>
+            <Grid container spacing={3}>
                 <Grid className='lateral-zone' item xs={4}>
                     <h2>Espacio buscador</h2>
                 </Grid>
@@ -27,11 +26,11 @@ export const UserArea = () => {
                     <h2>My Photos</h2>
                     {
                         myImages ? 
-                            <ImageList sx={{ width: 1, height: '100%' }} cols={3} rowHeight={164}>
+                            <ImageList sx={{ width: 1, height: '100%', gap:'10px' }} cols={3} rowHeight={164}>
                                 {
                                     myImages.map(img => {
                                         return (
-                                            <ImageCard img={img} />
+                                            <ImageCard key={img.id} img={img} setMyImages={setMyImages} />
                                         )
                                     })
                                 }

@@ -3,10 +3,21 @@ import {Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButto
 import { red } from '@mui/material/colors';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import storage from '../../utils/storage/storage';
 
-export const ImageCard = ({img}) => {
+export const ImageCard = ({img, setMyImages}) => {
+
+    let date = new Date(img.date);
+
+    const deleteItem = (imageId) => {
+        const updateFavorites = storage.get(process.env.REACT_APP_USER_FAVORITES)
+                                    .filter(image => image.id !== imageId);
+        storage.set(process.env.REACT_APP_USER_FAVORITES, updateFavorites);
+        setMyImages(updateFavorites);
+    }
+
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, maxHeight:415, border:'1px solid #8080805c' }}>
             <CardHeader
                 avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -14,29 +25,27 @@ export const ImageCard = ({img}) => {
                 </Avatar>
                 }
                 title={img.alt_description ? img.alt_description : 'No title'}
-                subheader={img.date.toLocaleDateString('es-ES')}
+                subheader={date.toLocaleTimeString('es-ES')}
             />
             <CardMedia
                 component="img"
                 height="194"
-                image="/static/images/cards/paella.jpg"
-                alt="Paella dish"
+                image={img.url_thumb}
+                alt={img.alt_desription}
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                This impressive paella is a perfect party dish and a fun meal to cook
-                together with your guests. Add 1 cup of frozen peas along with the mussels,
-                if you like.
+                {img.description? img.description : (<h3>Image without description</h3>)}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                <DeleteIcon />
+                <IconButton aria-label="remove from favorites" onClick={() => deleteItem(img.id)}>
+                    <DeleteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                <EditIcon />
+                <IconButton aria-label="edit">
+                    <EditIcon />
                 </IconButton>
             </CardActions>
         </Card>
-      );
+    );
 }
