@@ -10,7 +10,6 @@ export const Dashboard = () => {
     const [images, setImages] = useState([])
 
     useEffect(() => {
-        console.log('SEARCH', search);
         searchImages(search)
             .then(response => {
                 setImages(response.results)
