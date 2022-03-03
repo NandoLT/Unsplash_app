@@ -14,7 +14,6 @@ function createData(width, height, date) {
 
 export const ImgTableData = ({width, height, dateAdded}) => {
     const date = dateAdded.toLocaleString('es-ES', { timeZone: 'UTC' });
-    console.log(width, height, date)
 
     const rows = [
         createData('Weight', width + ' px' ),

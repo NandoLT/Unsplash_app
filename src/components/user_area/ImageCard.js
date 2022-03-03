@@ -7,7 +7,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import storage from '../../utils/storage/storage';
 import {DescriptionForm} from './DescriptionForm';
-import { saveAs } from 'file-saver'
+import { saveAs } from 'file-saver';
 import { ImgTableData } from './ImgTableData';
 
 
@@ -47,7 +47,7 @@ export const ImageCard = ({img, setMyImages}) => {
         saveAs(img.url_full, img.id);
     }
 
-    return (
+    return ( 
         <Card sx={{ maxWidth: 345, maxHeight:'100%', border:'1px solid #8080805c' }}>
             <CardHeader
                 avatar={

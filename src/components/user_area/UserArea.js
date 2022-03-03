@@ -3,6 +3,7 @@ import Layout from '../commons/Layout/Layout';
 import {Box, Grid, ImageList, Alert} from '@mui/material';
 import storage from '../../utils/storage/storage';
 import { ImageCard } from './ImageCard';
+import { OrderImages } from './OrderImages';
 
 import '../../assets/css/UserArea.css';
 
@@ -24,6 +25,9 @@ export const UserArea = () => {
                 </Grid>
                 <Grid item xs={8}>
                     <h2>My Photos</h2>
+                    <hr />
+                        <OrderImages images={myImages} setMyImages={setMyImages}/>
+                    <hr />
                     {
                         myImages ? 
                             <ImageList sx={{ width: 1, height: '100%', gap:'10px' }} cols={3} rowHeight={164}>
