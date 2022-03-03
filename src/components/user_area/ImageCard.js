@@ -3,8 +3,10 @@ import {Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButto
 import { red } from '@mui/material/colors';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import DownloadIcon from '@mui/icons-material/Download';
 import storage from '../../utils/storage/storage';
 import {DescriptionForm} from './DescriptionForm';
+import { saveAs } from 'file-saver'
 
 export const ImageCard = ({img, setMyImages}) => {
 
@@ -14,7 +16,6 @@ export const ImageCard = ({img, setMyImages}) => {
 
     
     useEffect(() => {
-        console.log('DESCRIPTION', description);
         description && updateDescription(img, description);
     },[description])
 
@@ -32,14 +33,16 @@ export const ImageCard = ({img, setMyImages}) => {
     }
 
     const updateDescription = (img) => {
-        console.log('IMAGE', img)
         img.description = description;
-        console.log('IMAGE 2', img)
         deleteItem(img.id);
         const update = storage.get(process.env.REACT_APP_USER_FAVORITES);
         update.push(img);
         storage.set(process.env.REACT_APP_USER_FAVORITES, update);
         setMyImages(update);
+    }
+
+    const downloadImg = () => {
+        saveAs(img.url_full, img.id) // Put your image url here.
     }
 
     return (
@@ -70,6 +73,9 @@ export const ImageCard = ({img, setMyImages}) => {
                 </IconButton>
                 <IconButton aria-label="edit" onClick={openEdit}>
                     <EditIcon />
+                </IconButton>
+                <IconButton aria-label="download" onClick={downloadImg}>
+                    <DownloadIcon />
                 </IconButton>
             </CardActions>
         <DescriptionForm open={open} setOpen={setOpen} setDescription={setDescription} imgDescription={img.description} />
