@@ -47,7 +47,7 @@ export const UserArea = () => {
                             <>
                                 <OrderImages images={myImages} setMyImages={setFoundImages}/>
                                 <hr />
-                                <ImageList sx={{ width: 1, height: '100%', gap:'10px' }} cols={3} rowHeight={164}>
+                                <ImageList sx={{ width: 1, height: 'auto', gap:'10px' }} cols={3} rowHeight={164}>
                                     {
                                         foundImages.map(img => {
                                             return (
