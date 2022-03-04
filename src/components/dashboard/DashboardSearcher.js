@@ -11,13 +11,14 @@ export const DashboardSearcher = ({setSearch}) => {
     
     const handleInputChange  = (e) => {
         setInputValue(e.target.value);
+        setSearch(inputValue);
     }   
     
     const handleSubmit = (e) => {
         e.preventDefault();
         
         if(inputValue.trim().length > 2) {
-            setSearch(inputValue);
+            // setSearch(inputValue);
             setInputValue('');
         } 
     }

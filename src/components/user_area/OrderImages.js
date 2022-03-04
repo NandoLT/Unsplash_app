@@ -10,6 +10,7 @@ export const OrderImages = ({images, setMyImages}) => {
     const imagesOrder = [...images]
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -20,34 +21,34 @@ export const OrderImages = ({images, setMyImages}) => {
     const orderImages = (operation) => {
         switch (operation) {
             case 'widthAsc':
-                    console.log('Order width menor mayor');
                     imagesOrder.sort((a,b) => a.width - b.width )
                     setMyImages(imagesOrder);
+                    handleClose()
                 break;
                 case 'widthDesc':
-                    console.log('Order width mayor menor');
                     imagesOrder.sort((a,b) => b.width - a.width )
                     setMyImages(imagesOrder);
+                    handleClose()
                 break;
             case 'heightAsc':
-                    console.log('Order width mayor menor');
                     imagesOrder.sort((a,b) => a.height - b.height )
                     setMyImages(imagesOrder);
+                    handleClose()
                 break;
             case 'heightDesc':
-                    console.log('Order width mayor menor');
                     imagesOrder.sort((a,b) => b.height - a.height )
                     setMyImages(imagesOrder);
+                    handleClose()
                 break;
             case 'likesAsc':
-                    console.log('Order width mayor menor');
                     imagesOrder.sort((a,b) => a.likes - b.likes )
                     setMyImages(imagesOrder);
+                    handleClose()
                 break;
             case 'likesDesc':
-                    console.log('Order width mayor menor');
                     imagesOrder.sort((a,b) => b.likes - a.likes )
                     setMyImages(imagesOrder);
+                    handleClose()
                 break;
         
             default:
