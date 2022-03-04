@@ -21,7 +21,7 @@ export const UserArea = () => {
 
     const setSearch = (value) => {
 
-        if(value.length !== 0 ) {
+        if(value !== '' ) {
             const search = myImages.filter(image => image.description.toLowerCase().includes(value.toLowerCase()));
             // console.log('SEARCH', search);
             setFoundImages(search);
