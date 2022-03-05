@@ -5,22 +5,23 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import PropTypes from 'prop-types';
 
-export const DashboardSearcher = ({setSearch}) => {
+export const Searcher = ({setSearch, valueToShort, valueSucces}) => {
 
     const [inputValue, setInputValue] = useState('');
     
     const handleInputChange  = (e) => {
         setInputValue(e.target.value);
-        setSearch(inputValue);
     }   
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        
         if(inputValue.trim().length > 2) {
-            // setSearch(inputValue);
+            setSearch(inputValue);
+            valueSucces();
             setInputValue('');
-        } 
+        } else {
+            valueToShort();
+        }
     }
 
     return (
@@ -45,6 +46,7 @@ export const DashboardSearcher = ({setSearch}) => {
     )
     }
     
-    DashboardSearcher.propTypes = {
-        setSearch: PropTypes.func.isRequired
+    Searcher.propTypes = {
+        setSearch: PropTypes.func.isRequired,
+        valueToShort: PropTypes.func.isRequired
     }
