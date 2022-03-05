@@ -65,9 +65,10 @@ export const DashboardImagesGrid = ({images}) => {
                 <Button onClick={handleClose} variant="contained">Close</Button>
             </Box>
             </Modal>
-            <ImageList variant='masonry' >
+            {/* <ImageList variant='masonry' > */}
+            <ImageList sx={{width:'100%', height:'100%'}} cols={5}>
                 {images.map((img) => (
-                    <ImageListItem key={img.id}>
+                    <ImageListItem key={img.id} >
                         <img
                             src={img.urls.regular}
                             alt={img.alt_description}

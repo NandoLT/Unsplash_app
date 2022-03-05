@@ -18,7 +18,6 @@ export const Searcher = ({setSearch, valueToShort, valueSucces}) => {
         if(inputValue.trim().length > 2) {
             setSearch(inputValue);
             valueSucces();
-            setInputValue('');
         } else {
             valueToShort();
         }
