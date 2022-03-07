@@ -1,10 +1,10 @@
 import React from 'react';
 import {Routes, Route, Navigate} from 'react-router-dom'
-import NotFound from './components/commons/NotFound';
-import { Dashboard } from './components/dashboard/Dashboard';
-import { UserArea } from './components/user_area/UserArea';
+import NotFound from '../components/commons/NotFound';
+import { Dashboard } from '../components/dashboard/Dashboard';
+import { UserArea } from '../components/user_area/UserArea';
 
-import './assets/css/App.css';
+import '../assets/css/App.css';
 
 function App() {
   return (

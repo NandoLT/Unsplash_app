@@ -43,7 +43,6 @@ export const UserArea = () => {
             <Box sx={{ flexGrow: 1, marginBottom:'50px' }}>
             <Grid container spacing={3}>
                 <Grid className='lateral-zone' item xs={4}>
-                    <h2>Espacio buscador</h2>
                     <Searcher setSearch={setSearch} valueToShort={valueToShort} valueSucces={valueSucces}/>
                     <br />
                     <Button  onClick={resetImages} variant="contained" sx={{ p: '10px' }} aria-label="search" >Reset Search</Button>
