@@ -1,4 +1,3 @@
-import {searchImages} from '../../utils/data/imageData/imageApi';
 // import {selectSearchTerm} from '../searchTerm/searchTermSlice';
 
 
@@ -25,8 +24,7 @@ export const allImagesReducer = (allImages = initialState, action) => {
 
 
 //selectors
-
-export const selectAllImages = (state) => state.allImages;
+export const selectAllImages = state => state.allImages;
 
 // export const selectFilteredAllRecipes = (state) => {
 //   const allRecipes = selectAllRecipes(state);
@@ -37,11 +35,3 @@ export const selectAllImages = (state) => state.allImages;
 //   );
 // };
 
-//Utils
-// const loadImageData = (searchTerm, page) => {
-    // searchImages(searchTerm, page) 
-    //     .then(response => {
-    //         console.log('RESPONSE', response.result);
-    //         return response.results
-    //     });
-// }

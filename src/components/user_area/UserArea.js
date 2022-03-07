@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../commons/Layout/Layout';
 import {Box, Grid, ImageList, Alert, Button} from '@mui/material';
+import {useSelector, useDispatch} from 'react-redux';
+import {selectMyFavorites, getFavorites} from '../../features/favoriteImages/favoriteImagesSlice';
 import storage from '../../utils/storage/storage';
 import { ImageCard } from './ImageCard';
 import { OrderImages } from './OrderImages';
@@ -10,6 +12,10 @@ import '../../assets/css/UserArea.css';
 
 export const UserArea = () => {
 
+    const dispatch = useDispatch();
+    const myFavoriteImages = useSelector(selectMyFavorites);
+    console.log('MYFAVORITEIMAGES', myFavoriteImages.length);
+
     const [myImages, setMyImages] = useState(null);
     const [foundImages, setFoundImages] = useState(null);
     const [notValidValue, setNotValidValue] = useState(false);
@@ -17,8 +23,9 @@ export const UserArea = () => {
     
     useEffect(() => {
         const data = storage.get(process.env.REACT_APP_USER_FAVORITES);
-        setMyImages(data);
-        setFoundImages(data);
+        // setMyImages(data);
+        // setFoundImages(data);
+        data && dispatch(getFavorites(data));
     },[])
 
     const setSearch = (value) => {
@@ -53,13 +60,16 @@ export const UserArea = () => {
                     <h2>My Photos</h2>
                     <hr />
                     {
-                        foundImages ? 
+                        // foundImages ? 
+                        myFavoriteImages.length > 1 ? 
                             <>
-                                <OrderImages images={myImages} setMyImages={setFoundImages}/>
+                                {/* <OrderImages images={myImages} setMyImages={setFoundImages}/> */}
+                                <OrderImages images={myFavoriteImages} setMyImages={setFoundImages}/>
                                 <hr />
                                 <ImageList sx={{ width: 1, height: 'auto', gap:'10px' }} cols={3} rowHeight={164}>
                                     {
-                                        foundImages.map(img => {
+                                        // foundImages.map(img => {
+                                        myFavoriteImages.map(img => {
                                             return (
                                                 <ImageCard key={img.id} img={img} setMyImages={setFoundImages} />
                                             )

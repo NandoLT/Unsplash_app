@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {loadData, selectAllImages} from '../../features/allImages/allImagesSlice';
+import storage from '../../utils/storage/storage';
 import Layout from '../commons/Layout/Layout';
 import { Searcher } from '../commons/Searcher';
 import { DashboardImagesGrid } from './DashboardImagesGrid';
@@ -15,7 +16,7 @@ export const Dashboard = () => {
     const dispatch = useDispatch();
     const allImages = useSelector(selectAllImages);
 
-    const [search, setSearch] = useState('Madrid');
+    const [search, setSearch] = useState('');
     const [pagination, setPagination] = useState(null);
     const page = 1
 
@@ -43,7 +44,7 @@ export const Dashboard = () => {
             .then(response => {
                 dispatch(loadData(response.results))
                 setPagination(response.total_pages);
-        }) 
+        });
     }, [search])
 
     return (
