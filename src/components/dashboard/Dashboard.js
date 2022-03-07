@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {loadData, selectAllImages} from '../../features/allImages/allImagesSlice';
 import Layout from '../commons/Layout/Layout';
 import { Searcher } from '../commons/Searcher';
 import { DashboardImagesGrid } from './DashboardImagesGrid';
@@ -10,8 +12,10 @@ import '../../assets/css/Dashboard.css';
 
 export const Dashboard = () => {
 
-    const [search, setSearch] = useState('');
-    const [images, setImages] = useState([]);
+    const dispatch = useDispatch();
+    const allImages = useSelector(selectAllImages);
+
+    const [search, setSearch] = useState('Madrid');
     const [pagination, setPagination] = useState(null);
     const page = 1
 
@@ -25,9 +29,9 @@ export const Dashboard = () => {
         setNotValidValue(false);
     }
 
-    const searchImagesCall = (search, page) => {
+    const searchImagesCall = (search, page ) => {
         searchImages(search, page)
-            .then(response => setImages(response.results));
+            .then(response => dispatch(loadData(response.results)));
     }
 
     const handleChange = (event, value ) => {
@@ -37,9 +41,9 @@ export const Dashboard = () => {
     useEffect( () => {
         searchImages(search, page)
             .then(response => {
-                setImages(response.results);
+                dispatch(loadData(response.results))
                 setPagination(response.total_pages);
-        })
+        }) 
     }, [search])
 
     return (
@@ -49,10 +53,9 @@ export const Dashboard = () => {
             {notValidValue ? <Alert sx={{width: '80%', margin:'auto'}} severity="warning">{valueShort}</Alert> : ''}
             <hr />
             {
-                images.length > 0 ?
+                allImages.length > 0 ?
                 <>
-
-                    <DashboardImagesGrid images={images} searchBy={search} />
+                    <DashboardImagesGrid images={allImages} searchBy={search} />
                     <Pagination count={pagination} variant="outlined" shape="rounded" onChange={handleChange} sx={{justifyContent:'center'}}/>
                 </>
                 :
