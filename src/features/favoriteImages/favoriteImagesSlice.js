@@ -26,7 +26,6 @@ const initialState = [];
 export const myFavoriteImagesReducer = (myFavorites = initialState, action) => {
     switch(action.type) {
         case 'get/getFavorites':
-            console.log('PAYLOAD', action.payload);
             return action.payload;
         case 'add/addToFavorites':
             return  myFavorites.filter(img =>{

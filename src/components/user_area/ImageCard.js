@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Badge} from '@mui/material';
-import {removeFromFavorites, modifyDescription, addToFavorites} from '../../features/favoriteImages/favoriteImagesSlice';
+import {removeFromFavorites, addToFavorites} from '../../features/favoriteImages/favoriteImagesSlice';
 import { red } from '@mui/material/colors';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';

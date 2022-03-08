@@ -14,27 +14,24 @@ export const UserArea = () => {
 
     const dispatch = useDispatch();
     const myFavoriteImages = useSelector(selectMyFavorites);
-    console.log('MYFAVORITEIMAGES', myFavoriteImages.length);
 
-    const [myImages, setMyImages] = useState(null);
     const [foundImages, setFoundImages] = useState(null);
     const [notValidValue, setNotValidValue] = useState(false);
     const valueShort = 'value must be greater than two characters';
     
     useEffect(() => {
         const data = storage.get(process.env.REACT_APP_USER_FAVORITES);
-        // setMyImages(data);
-        // setFoundImages(data);
+        setFoundImages(data);
         data && dispatch(getFavorites(data));
     },[])
 
     const setSearch = (value) => {
-        const search = myImages.filter(image => image.description?.toLowerCase().includes(value.toLowerCase()));
+        const search = myFavoriteImages.filter(image => image.description?.toLowerCase().includes(value.toLowerCase()));
         setFoundImages(search);
     }
 
     const resetImages = () => {
-        setFoundImages(myImages);
+        setFoundImages(myFavoriteImages);
     }
 
     const valueToShort = () => {
@@ -60,16 +57,16 @@ export const UserArea = () => {
                     <h2>My Photos</h2>
                     <hr />
                     {
-                        // foundImages ? 
-                        myFavoriteImages.length > 1 ? 
+                        foundImages ? 
+                        // myFavoriteImages.length > 1 ? 
                             <>
-                                {/* <OrderImages images={myImages} setMyImages={setFoundImages}/> */}
-                                <OrderImages images={myFavoriteImages} setMyImages={setFoundImages}/>
+                                <OrderImages images={foundImages} setMyImages={setFoundImages}/>
+                                {/* <OrderImages images={myFavoriteImages} setMyImages={setFoundImages}/> */}
                                 <hr />
                                 <ImageList sx={{ width: 1, height: 'auto', gap:'10px' }} cols={3} rowHeight={164}>
                                     {
-                                        // foundImages.map(img => {
-                                        myFavoriteImages.map(img => {
+                                        foundImages.map(img => {
+                                        // myFavoriteImages.map(img => {
                                             return (
                                                 <ImageCard key={img.id} img={img} setMyImages={setFoundImages} />
                                             )
@@ -79,7 +76,6 @@ export const UserArea = () => {
                             </>
                         :
                             <Alert severity="warning">No images!</Alert>
-
                     }
                 </Grid>
             </Grid>
