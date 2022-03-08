@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography, Badge} from '@mui/material';
-import {removeFromFavorites, modifyDescription, myFavoriteImages, getFavorites} from '../../features/favoriteImages/favoriteImagesSlice';
+import {removeFromFavorites, modifyDescription, addToFavorites} from '../../features/favoriteImages/favoriteImagesSlice';
 import { red } from '@mui/material/colors';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -15,7 +15,6 @@ import { ImgTableData } from './ImgTableData';
 
 export const ImageCard = ({img, setMyImages}) => {
     const dispatch = useDispatch();
-    const myFavoriteImages = useSelector(myFavoriteImages);
 
     const [open, setOpen] = useState(false);
     const [description, setDescription] = useState();
@@ -31,21 +30,20 @@ export const ImageCard = ({img, setMyImages}) => {
         const updateFavorites = storage.get(process.env.REACT_APP_USER_FAVORITES)
                                     .filter(image => image.id !== imageId);
         storage.set(process.env.REACT_APP_USER_FAVORITES, updateFavorites);
-        // setMyImages(updateFavorites);
-        dispatch(getFavorites(storage.process.env.REACT_APP_USER_FAVORITES));
+        dispatch(removeFromFavorites(imageId));
     }
 
     const openEdit = () => {
         setOpen(!open);
     }
 
-    const updateDescription = (img) => {
-        img.description = description;
-        deleteItem(img.id);
-        const update = storage.get(process.env.REACT_APP_USER_FAVORITES);
-        update.push(img);
-        storage.set(process.env.REACT_APP_USER_FAVORITES, update);
-        setMyImages(update);
+    const updateDescription = (imag) => {
+        imag.description = description;
+        const lStorage = storage.get(process.env.REACT_APP_USER_FAVORITES);
+        let updateImages = lStorage.filter(img => img.id !== imag.id);
+        updateImages.push(imag);
+        storage.set(process.env.REACT_APP_USER_FAVORITES, updateImages);
+        dispatch(addToFavorites(imag));
     }
 
     const downloadImg = () => {

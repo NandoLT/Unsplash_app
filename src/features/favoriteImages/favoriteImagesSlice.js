@@ -7,18 +7,17 @@ export const getFavorites = (dataStorage) => {
         payload: dataStorage
     }
 }
-
-export const removeFromFavorites = (image) => {
+export const addToFavorites = (image) => {
     return {
-        type: 'remove/removeFromFavorites',
+        type: 'add/addToFavorites',
         payload: image
     }
 }
 
-export const modifyDescription = (image) => {
+export const removeFromFavorites = (imageId) => {
     return {
-        type: 'modify/modifyDescription',
-        payload: image
+        type: 'remove/removeFromFavorites',
+        payload: imageId
     }
 }
 
@@ -29,10 +28,15 @@ export const myFavoriteImagesReducer = (myFavorites = initialState, action) => {
         case 'get/getFavorites':
             console.log('PAYLOAD', action.payload);
             return action.payload;
+        case 'add/addToFavorites':
+            return  myFavorites.filter(img =>{
+                   if(img.id === action.payload.id) {
+                    img.description = action.payload.description;
+                   }
+                   return img;
+                }); 
         case 'remove/removeFromFavorites':
-            return [myFavorites, ...action.payload];
-        case 'modify/modifyDescription':
-            return [myFavorites, ...action.payload];
+            return myFavorites.filter(img => img.id !== action.payload);
         default:
             return myFavorites;
     }
